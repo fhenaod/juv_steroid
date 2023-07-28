@@ -34,7 +34,7 @@ t_fig_a <-
        y = "Testosterone (ng/g)", 
        subtitle = NULL) +
   theme(text = element_text(size = 18), 
-        legend.position = "left", legend.title = element_blank()) +
+        legend.position = "none", legend.title = element_blank()) +
   scale_y_continuous(limits = c(0, .17), expand = c(0, 0))
 
 t_fig_b <- 
@@ -57,8 +57,10 @@ t_fig_b <-
   labs(x = NULL, 
        y = " ", 
        subtitle = NULL) +
-  theme(text = element_text(size = 18),
-        legend.position = "left", legend.title = element_blank()) +
+  theme(text = element_text(size = 18), legend.title = element_blank(), 
+        legend.position = c(0, 0.85), 
+        legend.justification = c(-0.15, 0),
+        legend.direction = "vertical") +
   scale_y_continuous(limits = c(0, 3.2), expand = c(0, 0)) +
   geom_text(x = 1.82, y = 0.05, label = "nd", size = 6) +
   geom_text(x = 4.18, y = 0.05, label = "nd", size = 6) +
@@ -67,7 +69,7 @@ t_fig_b <-
   geom_text(x = 9.82, y = 0.05, label = "nd", size = 6)
 
 t_fig_a + t_fig_b + 
-  plot_layout(design = "ABBBBBB", guides = 'collect') +
+  plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 ggsave(paste0(path4figs, "t_brain.tiff"), 
@@ -97,7 +99,7 @@ b_fig_a <-
        y = "Corticosterone (ng/g)", 
        subtitle = "") +
   theme(text = element_text(size = 15), legend.title = element_blank(),
-        legend.position = "left") +
+        legend.position = "none") +
   scale_y_continuous(limits = c(0, 20), expand = c(0, 0)) +
   geom_signif(#comparisons = list(c("Control", "STI")), 
     annotations = "****",
@@ -124,8 +126,10 @@ b_fig_b <-
   labs(x = NULL, 
        y = " ", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(),
-        legend.position = "left") +
+  theme(text = element_text(size = 18), legend.title = element_blank(), 
+        legend.position = c(0, 0.85), 
+        legend.justification = c(-0.15, 0),
+        legend.direction = "vertical") +
   scale_y_continuous(limits = c(0, 8), expand = c(0, 0)) +
   geom_signif(annotations = c("****", "****", "***", "***", "****", "****", "****", "***", "*", "****"), 
               y_position = c(5.5, 5.5, 5.5, 2.6, 5.5, 5.8, 5.5, 6.6, 5.5, 6.9), 
@@ -134,7 +138,7 @@ b_fig_b <-
               tip_length = 10, vjust = .5, size = 1, textsize = 8)
 
 b_fig_a + b_fig_b + 
-  plot_layout(design = "ABBBBBB", guides = 'collect') +
+  plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 ggsave(paste0(path4figs, "b_brain.tiff"), 
@@ -163,8 +167,8 @@ dhc_fig_a <-
   labs(x = NULL, 
        y = "Dehydrocorticosterone (ng/g)", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(),
-        legend.position = "left") +
+  theme(text = element_text(size = 18), legend.title = element_blank(),
+        legend.position = "none") +
   scale_y_continuous(limits = c(0, 4), expand = c(0, 0)) +
   geom_signif(#comparisons = list(c("Control", "STI")), 
               annotations = "****",
@@ -191,8 +195,10 @@ dhc_fig_b <-
   labs(x = NULL, 
        y = "", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(), 
-        legend.position = "left") +
+  theme(text = element_text(size = 18), legend.title = element_blank(), 
+        legend.position = c(0, 0.85), 
+        legend.justification = c(-0.15, 0),
+        legend.direction = "vertical") +
   scale_y_continuous(limits = c(0, .250001), expand = c(0, 0)) + 
   geom_signif(annotations = c("#", "#"), 
               y_position = c(0.14, 0.14), 
@@ -201,7 +207,8 @@ dhc_fig_b <-
   geom_text(x = 9.82, y = 0.004, label = "nd", size = 6)
   
 dhc_fig_a + dhc_fig_b + 
-  plot_layout(design = "ABBBBBB", guides = 'collect') +
+  plot_layout(design = "ABBBBBB", guides = 'keep'
+              ) +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 ggsave(paste0(path4figs, "dhc_brain.tiff"), 
@@ -231,7 +238,7 @@ p4_fig_a <- brain_data %>%
        y = "Progesterone (ng/g)", 
        subtitle = "") +
   theme(text = element_text(size = 15), legend.title = element_blank(),
-        legend.position = "left") +
+        legend.position = "none") +
   scale_y_continuous(limits = c(0, 3), expand = c(0, 0)) +
   geom_signif(#comparisons = list(c("Control", "STI")), 
     annotations = "#",
@@ -258,8 +265,10 @@ p4_fig_b <- brain_data %>%
   labs(x = NULL, 
        y = " ", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(),
-        legend.position = "left") +
+  theme(text = element_text(size = 18), legend.title = element_blank(), 
+        legend.position = c(0, 0.85), 
+        legend.justification = c(-0.15, 0),
+        legend.direction = "vertical") +
   scale_y_continuous(limits = c(0, .300001), expand = c(0, 0)) +
   geom_text(x = 0.82, y = 0.005, label = "nd", size = 6) +
   geom_text(x = 1.82, y = 0.005, label = "nd", size = 6) +
@@ -275,7 +284,7 @@ p4_fig_b <- brain_data %>%
   geom_text(x = 10.18,y = 0.005, label = "nd", size = 6)
 
 p4_fig_a + p4_fig_b + 
-  plot_layout(design = "ABBBBBB", guides = 'collect') +
+  plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 ggsave(paste0(path4figs, "p4_brain.tiff"), 
@@ -290,7 +299,7 @@ t_fig_a + t_fig_b +
                         CDDDDDD
                         EFFFFFF
                         GHHHHHH", 
-              guides = 'collect') +
+              guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 
