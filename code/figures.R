@@ -194,8 +194,9 @@ dhc_fig_b <-
   theme(text = element_text(size = 15), legend.title = element_blank(), 
         legend.position = "left") +
   scale_y_continuous(limits = c(0, .250001), expand = c(0, 0)) + 
-  geom_signif(annotations = "#", 
-              y_position = 0.12, xmin = 3.82, xmax = 4.18, 
+  geom_signif(annotations = c("#", "#"), 
+              y_position = c(0.14, 0.14), 
+              xmin = c(0.82, 3.82), xmax = c(1.18, 4.18), 
               tip_length = 10, vjust = -.2, size = 1, textsize = 8) + 
   geom_text(x = 9.82, y = 0.004, label = "nd", size = 6)
   

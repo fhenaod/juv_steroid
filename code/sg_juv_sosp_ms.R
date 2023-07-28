@@ -276,7 +276,7 @@ t.brain.emm$`pairwise differences of matrix, condition` %>%
   separate(X1, c("pair_1", "pair_2"), sep = " - ") %>% 
   separate(pair_1, c("m_1", "con_1"), sep = " ") %>% 
   separate(pair_2, c("m_2", "con_2"), sep = " ") %>%
-  filter(!con_1==con_2) %>% 
+  filter(!con_1 == con_2) %>% 
   kbl(caption = "Brain - b") %>%
   kable_paper(bootstrap_options = "striped", 
               full_width = F, html_font = 12) %>% 
