@@ -15,23 +15,26 @@ library(lmerTest)
 
 # Load data ####
 
-data <- read.csv("~/Desktop/SG_juv_MS/behaviour/sg_ms_behaviour.csv")
-data %>% head()
+# behaviour data
+beh_data <- read.csv("data/sg_ms_behaviour.csv")
+beh_data %>% head()
 
-brain_data <- read_csv("~/Desktop/SG_juv_MS/brain_blood/output_sofia_long_removed_wb.csv")
+# brain and circulation data
+brain_data <- read_csv("data/sg_ms_brain.csv")
 brain_data %>% head()
 
-raw_data <- read.csv("~/Desktop/SG_juv_MS/peripheral_tissue/03-26-2023_juv_tissue_imputed.csv") %>% select(-tissue_weight, -conc)
-raw_data %>% head()
+# peripheral tissue data 
+pt_data <- read.csv("data/sg_ms_periph_tissue.csv") %>% 
+  select(-tissue_weight)
+pt_data %>% head()
 
 ## Data transformation ####
-
 brain_data$log_con <- log(brain_data$concentration)
 brain_data %>% summary()
 brain_data %>% view()
 
-raw_data$log_con <- log(raw_data$raw) 
-raw_data %>% summary()
+pt_data$log_con <- log(pt_data$conc) 
+pt_data %>% summary()
 
 # **********************************************####
 
@@ -40,19 +43,19 @@ raw_data %>% summary()
 ## Call Latency ####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(call_lat ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(call_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(call_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -60,19 +63,19 @@ data %>%
 ## Song Latency ####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(song_lat ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(song_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(song_lat ~ age, data = ., 
               na.rm = T)
@@ -80,19 +83,19 @@ data %>%
 ## Flight Latency ####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(flight_lat ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(flight_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(flight_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -100,19 +103,19 @@ data %>%
 ## Response Latency #####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(resp_lat ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(resp_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(resp_lat ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -120,19 +123,19 @@ data %>%
 ## Number of Songs #####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(songs ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(songs ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(songs ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -140,19 +143,19 @@ data %>%
 ## Number of Flights ####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(flights ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(flights ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(flights ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -160,19 +163,19 @@ data %>%
 ## Time Within 5m ####
 
 #### STI juveniles vs controls ####
-data %>% 
+beh_data %>% 
   filter(age == "juv") %>% 
   wilcox.test(time ~ condition, data = ., 
               na.rm = T, conf.int = T)
 
 #### STI juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "sti") %>% 
   wilcox.test(time ~ age, data = ., 
               na.rm = T, conf.int = T)
 
 #### Control juveniles vs adults ####
-data %>%
+beh_data %>%
   filter(condition == "control") %>% 
   wilcox.test(time ~ age, data = ., 
               na.rm = T, conf.int = T)
@@ -198,7 +201,7 @@ t.brain.out <- brain_data %>%
   filter(matrix %in% c("ah", "bnst", "cb", "cg", 
                        "ls", "ncm", "poa", "tna", "vmh", "vta")) %>% 
   lmer(log_con ~ matrix*condition + (1|subject), data = .)
-  anova(t.brain.out)
+anova(t.brain.out)
 
 t.brain.emm <- 
   emmeans::emmeans(t.brain.out, 
@@ -208,10 +211,10 @@ t.brain.emm
 
 #### Peripheral Tissues ####
 
-tt.out <- raw_data %>% 
+tt.out <- pt_data %>% 
   filter(steroid == "t") %>% 
   lmer(log_con ~ condition*matrix + (1|subject), data = .)
-  anova(tt.out)
+anova(tt.out)
 
 t.peripheral.emm <- 
   emmeans::emmeans(tt.out, 
@@ -227,10 +230,10 @@ t.peripheral.emm
 
 #### Peripheral Tissues ####
 
-ae.adrenal.out <- raw_data %>% 
+ae.adrenal.out <- pt_data %>% 
   filter(steroid == "ae") %>% 
   filter(matrix == "adrenal") %>% 
-  wilcox.test(raw ~ condition, data = .)
+  wilcox.test(conc ~ condition, data = .)
 ae.adrenal.out
 
 ## Dihydrotestosterone ####
@@ -257,10 +260,10 @@ ae.adrenal.out
 
 #### Peripheral Tissues ####
 
-e2.liver.out <- raw_data %>% 
+e2.liver.out <- pt_data %>% 
   filter(steroid == "e2") %>% 
   filter(matrix == "liver") %>% 
-  wilcox.test(raw ~ condition, data = .)
+  wilcox.test(conc ~ condition, data = .)
 e2.liver.out
 
 ## 17a-estradiol ####
@@ -271,10 +274,10 @@ e2.liver.out
 
 #### Peripheral Tissues ####
 
-ae2.adrenal.out <- raw_data %>% 
+ae2.adrenal.out <- pt_data %>% 
   filter(steroid == "ae2") %>% 
   filter(matrix == "adrenal") %>% 
-  wilcox.test(raw ~ condition, data = .)
+  wilcox.test(conc ~ condition, data = .)
 ae2.adrenal.out
 
 ## Estrone ####
@@ -293,10 +296,10 @@ ae2.adrenal.out
 
 #### Peripheral Tissues ####
 
-e3.adrenal.out <- raw_data %>% 
+e3.adrenal.out <- pt_data %>% 
   filter(steroid == "e3") %>% 
   filter(matrix == "adrenal") %>% 
-  wilcox.test(raw ~ condition, data = .)
+  wilcox.test(conc ~ condition, data = .)
 e3.adrenal.out
 
 ## Progesterone ####
@@ -309,11 +312,18 @@ mw_p4_circ <- brain_data %>%
   wilcox.test(concentration ~ condition, data = .)
 mw_p4_circ
 
+mw_p4_plasma <- brain_data %>% 
+  filter(steroid == "p4") %>% 
+  filter(matrix %in% c("plasma")) %>% 
+  wilcox.test(concentration ~ condition, data = .)
+mw_p4_plasma
+
+
 #### Brain ####
 
 #### Peripheral Tissues ####
 
-p4.out <- raw_data %>% 
+p4.out <- pt_data %>% 
   filter(steroid == "p4") %>% 
   filter(matrix %in% c("liver", "pec", "testes")) %>% 
   lmer(log_con ~ condition*matrix + (1|subject), data = .)
@@ -333,16 +343,26 @@ p4.peripheral.emm
 
 #### Peripheral Tissues ####
 
-p5.adrenal.out <- raw_data %>% 
+p5.adrenal.out <- pt_data %>% 
   filter(steroid == "p5") %>% 
   filter(matrix == "adrenal") %>% 
-  wilcox.test(raw ~ condition, data = .)
+  wilcox.test(conc ~ condition, data = .)
 p5.adrenal.out
 
 ## Corticosterone ####
 
 #### Blood ####
+mw_b_circ <- brain_data %>% 
+  filter(steroid == "b") %>% 
+  filter(matrix == "wb") %>% 
+  wilcox.test(concentration ~ condition, data = .)
+mw_b_circ 
 
+mw_b_plasma <- brain_data %>% 
+  filter(steroid == "b") %>% 
+  filter(matrix == "wb") %>% 
+  wilcox.test(concentration ~ condition, data = .)
+mw_b_plasma
 
 #### Brain ####
 
@@ -361,7 +381,7 @@ b.brain.emm
 
 #### Peripheral Tissues ####
 
-b.out <- raw_data %>% 
+b.out <- pt_data %>% 
   filter(steroid == "b") %>% 
   filter(matrix %in% c("liver", "pec", "testes")) %>% 
   lmer(log_con ~ condition*matrix + (1|subject), data = .)
@@ -383,13 +403,19 @@ mw_dhc_circ <- brain_data %>%
   wilcox.test(concentration ~ condition, data = .)
 mw_dhc_circ  
 
+mw_dhc_plasma <- brain_data %>% 
+  filter(steroid == "dhc") %>% 
+  filter(matrix %in% c("plasma")) %>% 
+  wilcox.test(concentration ~ condition, data = .)
+mw_dhc_plasma
+
 #### Brain ####
 
 dhc.brain.out <- brain_data %>% 
   filter(steroid == "dhc") %>% 
   filter(matrix %in% c("ah" , "bnst", "cg", "ls", "ncm", "poa", "tna", "vmh", "vta")) %>% 
   lmer(log_con ~ condition * matrix + (1|subject), data = .)
-  anova(dhc.brain.out)
+anova(dhc.brain.out)
 
 dhc.brain.emm <- 
   emmeans::emmeans(dhc.brain.out, 
@@ -399,7 +425,7 @@ dhc.brain.emm
 
 #### Peripheral Tissues ####
 
-dhc.out <- raw_data %>% 
+dhc.out <- pt_data %>% 
   filter(steroid == "dhc") %>% 
   filter(matrix %in% c("liver", "pec", "testes")) %>% 
   lmer(log_con ~ condition*matrix + (1|subject), data = .)
@@ -412,9 +438,4 @@ dhc.peripheral.emm <-
 dhc.peripheral.emm
 
 # **********************************************####
-
-
-
-
-
 

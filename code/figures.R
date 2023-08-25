@@ -5,9 +5,7 @@ library(ggpubr) ; library(patchwork)
 
 # Brain and Blood ####
 # load data 
-path <- c("SG_juv_MS/brain_blood/")
-brain_data <- read_csv(paste0(path, "output_sofia_long_removed_wb.csv"))
-
+brain_data <- read.csv("data/sg_ms_brain.csv")
 path4figs <- c("SG_juv_MS/r_figs/")
 
 ## testosterone ####
@@ -98,7 +96,7 @@ b_fig_a <-
   labs(x = NULL, 
        y = "Corticosterone (ng/g)", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(),
+  theme(text = element_text(size = 18), legend.title = element_blank(),
         legend.position = "none") +
   scale_y_continuous(limits = c(0, 20), expand = c(0, 0)) +
   geom_signif(#comparisons = list(c("Control", "STI")), 
@@ -237,7 +235,7 @@ p4_fig_a <- brain_data %>%
   labs(x = NULL, 
        y = "Progesterone (ng/g)", 
        subtitle = "") +
-  theme(text = element_text(size = 15), legend.title = element_blank(),
+  theme(text = element_text(size = 18), legend.title = element_blank(),
         legend.position = "none") +
   scale_y_continuous(limits = c(0, 3), expand = c(0, 0)) +
   geom_signif(#comparisons = list(c("Control", "STI")), 
@@ -308,7 +306,7 @@ t_fig_a + t_fig_b +
 # Behaviour ####
 
 # load data 
-path <- c("SG_juv_MS/behaviour/")
+path <- c("data/")
 data <- read.csv(paste0(path, "sg_ms_behaviour.csv")) 
 data %>% head()
 
