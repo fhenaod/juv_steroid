@@ -1,12 +1,16 @@
-# Gray et al. 20xx
+# Gray et al. 
 doi here
 
 This repo contains the code from the paper "Effect of a territorial challenge on the steroid profile of a juvenile songbird".
-JOURNAL NAME x, pp-pp
+J NAME issue, pp-pp
 
 #
 
-This repo contains x folders:
+This repo contains two folders:
+
+### data
+
+data for behaviour, steroid concentration in circulation and brain, and steroid concentration in peripheral tissues in .csv format
 
 ### code
 scripts to reproduce analyses and figures
