@@ -22,7 +22,7 @@ aggr_cons <-
 left_join(
   conc %>% filter(steroid %in% c("p4", "b")) %>% 
   pivot_wider(names_from = steroid, values_from = concentration), 
-  beh_pca$x %>% data.frame() %>% select(PC1) %>% 
+  beh_pca$x %>% data.frame() %>% dplyr::select(PC1) %>% 
   rownames_to_column("subject") %>% 
     mutate(subject = tolower(subject)),
   by = c("subject")
@@ -30,7 +30,6 @@ left_join(
 
 aggr_cons %>% filter(is.na(PC1)) # check for unmatched values
 
-# lda by rater ####
 # plots ####
 # pc1 ~ corticosterone
 aggr_cons %>% 
@@ -54,9 +53,13 @@ aggr_cons %>%
   theme_classic() + 
   labs(x = "Corticosterone", y = "Aggression score (PC1)", 
        shape = "Condition", color = "Condition") +
+  scale_color_manual(values = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),) +
   theme(legend.position = "top", 
         strip.background = element_blank()) +
   facet_wrap(~matrix, scales = "free")
+
+ggsave(paste0(path4figs, "pc1_b_panel.pdf"), 
+       width = 10, height = 10, dpi = 300)
 
 # pc1 ~  progesterone
 aggr_cons %>% 
@@ -78,9 +81,13 @@ aggr_cons %>%
   theme_classic() + 
   labs(x = "Progesterone", y = "Aggression score (PC1)", 
        shape = "Condition", color = "Condition") +
+  scale_color_manual(values = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),) +
   theme(legend.position = "top", 
         strip.background = element_blank()) +
   facet_wrap(~matrix, scales = "free")
+
+ggsave(paste0(path4figs, "pc1_p4_panel.pdf"), 
+       width = 10, height = 10, dpi = 300)
 
 # discriminant
 

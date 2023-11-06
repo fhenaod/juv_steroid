@@ -5,14 +5,14 @@ library(ggpubr) ; library(patchwork)
 
 # Brain and Blood ####
 # load data 
-brain_data <- read.csv("data/sg_ms_brain.csv")
-path4figs <- c("SG_juv_MS/r_figs/")
+brain_data <- read.csv("rev2/sg_ms_brain.csv")
+path4figs <- c("rev2/")
 
 ## testosterone ####
 t_fig_a <- 
   brain_data %>% filter(steroid == "t") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Testosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Testosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("wb"#, "plasma"
   )) %>%  
   mutate(Matrix = dplyr::recode(Matrix, ah = "AH", bnst = "BnST", cb = "Cb", cg = "CG", ls = "LS", nac = "NAc", ncm = "NCM", plasma = "Plasma", poa = "POA", tna = "TnA", vmh = "VMH", vta = "VTA", wb = "Blood")) %>% 
@@ -26,7 +26,8 @@ t_fig_a <-
             width = .7,
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = "Testosterone (ng/g)", 
@@ -38,7 +39,7 @@ t_fig_a <-
 t_fig_b <- 
   brain_data %>% filter(steroid == "t") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Testosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Testosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("ah" , "bnst", "cb", "cg", "ls", "ncm", "poa", "tna", "vmh", "vta")) %>%  
   mutate(Matrix = dplyr::recode(Matrix, ah = "AH", bnst = "BnST", cb = "Cb", cg = "CG", ls = "LS", nac = "NAc", ncm = "NCM", plasma = "Plasma", poa = "POA", tna = "TnA", vmh = "VMH", vta = "VTA", wb = "Blood")) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", con = "Control")) %>% 
@@ -50,7 +51,8 @@ t_fig_b <-
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = " ", 
@@ -70,14 +72,14 @@ t_fig_a + t_fig_b +
   plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
-ggsave(paste0(path4figs, "t_brain.tiff"), 
+ggsave(paste0(path4figs, "t_brain.pdf"), 
        width = 16, height = 8, dpi = 300)
 
 ## corticosterone ####
 b_fig_a <- 
   brain_data %>% filter(steroid == "b") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Corticosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Corticosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("wb"
                        #, "plasma"
   )) %>%  
@@ -91,7 +93,8 @@ b_fig_a <-
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = "Corticosterone (ng/g)", 
@@ -107,7 +110,7 @@ b_fig_a <-
 b_fig_b <- 
   brain_data %>% filter(steroid == "b") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Corticosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Corticosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("ah" , "bnst", "cb", "cg", "ls", "ncm", "poa", "tna", "vmh", "vta")) %>%  
   mutate(Matrix = dplyr::recode(Matrix, ah = "AH", bnst = "BnST", cb = "Cb", cg = "CG", ls = "LS", nac = "NAc", ncm = "NCM", plasma = "Plasma", poa = "POA", tna = "TnA", vmh = "VMH", vta = "VTA", wb = "Blood")) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", con = "Control")) %>% 
@@ -119,7 +122,8 @@ b_fig_b <-
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = " ", 
@@ -146,7 +150,7 @@ ggsave(paste0(path4figs, "b_brain.tiff"),
 dhc_fig_a <-   
   brain_data %>% filter(steroid == "dhc") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>% 
-  select(Matrix = matrix, Dehydrocorticosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Dehydrocorticosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("wb"
                        #, "plasma"
   )) %>%  
@@ -160,7 +164,8 @@ dhc_fig_a <-
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = "Dehydrocorticosterone (ng/g)", 
@@ -176,7 +181,7 @@ dhc_fig_a <-
 dhc_fig_b <-     
   brain_data %>% filter(steroid == "dhc") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>% 
-  select(Matrix = matrix, Dehydrocorticosterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Dehydrocorticosterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("ah" , "bnst", "cb", "cg", "ls", "ncm", "poa", "tna", "vmh", "vta")) %>%  
   mutate(Matrix = dplyr::recode(Matrix, ah = "AH", bnst = "BnST", cb = "Cb", cg = "CG", ls = "LS", nac = "NAc", ncm = "NCM", plasma = "Plasma", poa = "POA", tna = "TnA", vmh = "VMH", vta = "VTA", wb = "Blood")) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", con = "Control")) %>% 
@@ -188,7 +193,8 @@ dhc_fig_b <-
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = "", 
@@ -216,7 +222,7 @@ ggsave(paste0(path4figs, "dhc_brain.tiff"),
 p4_fig_a <- brain_data %>% 
   filter(steroid == "p4") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Progesterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Progesterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("wb"
                        #, "plasma"
   )) %>%  
@@ -230,7 +236,8 @@ p4_fig_a <- brain_data %>%
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"), 
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = "Progesterone (ng/g)", 
@@ -246,7 +253,7 @@ p4_fig_a <- brain_data %>%
 p4_fig_b <- brain_data %>% 
   filter(steroid == "p4") %>% 
   mutate(concentration = coalesce(concentration, 0)) %>%
-  select(Matrix = matrix, Progesterone = concentration, Condition = condition) %>% 
+  dplyr::select(Matrix = matrix, Progesterone = concentration, Condition = condition) %>% 
   filter(Matrix %in% c("ah" , "bnst", "cb", "cg", "ls", "ncm", "poa", "tna", "vmh", "vta")) %>%  
   mutate(Matrix = dplyr::recode(Matrix, ah = "AH", bnst = "BnST", cb = "Cb", cg = "CG", ls = "LS", nac = "NAc", ncm = "NCM", plasma = "Plasma", poa = "POA", tna = "TnA", vmh = "VMH", vta = "VTA", wb = "Blood")) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", con = "Control")) %>% 
@@ -258,7 +265,8 @@ p4_fig_b <- brain_data %>%
             add = c("mean_se", "point"), 
             add.params = list(size = .8, alpha = 1), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"), 
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.7)) +
   labs(x = NULL, 
        y = " ", 
@@ -314,16 +322,18 @@ data %>% head()
 
 ## RESPONSE LATENCY #####
 #plot t test for juv sti vs control - response latency bar graph
+library(wesanderson)
 juv_resp_lat <- 
   data %>% filter(age == "juv") %>% 
-  select(Condition = condition, Response_Latency = resp_lat) %>% 
+  dplyr::select(Condition = condition, Response_Latency = resp_lat) %>% 
   mutate(Condition = dplyr::recode(Condition, control = "Control", sti = "STI")) %>% 
   ggbarplot(x = "Condition", y = "Response_Latency", 
             order = c("Control", "STI"),
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"),
             color = "black", fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+           #palette = c("#bfbfbf", "#505053"), # gray scale
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(.1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -339,13 +349,14 @@ juv_resp_lat <-
 #plot t test for STI adults vs juveniles - response latency bar graph
 sti_resp_lat <- 
   data %>% filter(condition == "sti") %>% 
-  select(Age = age, Response_Latency = resp_lat) %>% 
+  dplyr::select(Age = age, Response_Latency = resp_lat) %>% 
   mutate(Age = dplyr::recode(Age, juv = "Juvenile", adult = "Adult")) %>% 
   ggbarplot(x = "Age", y = "Response_Latency", 
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
             palette = c("#505053", "#9EBDBD"),
+            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -359,14 +370,15 @@ sti_resp_lat <-
 #plot t test for juv sti vs control - number of songs bar graph
 juv_n_song <- 
   data %>% filter(age == "juv") %>% 
-  select(Condition = condition, Songs = songs) %>% 
+  dplyr::select(Condition = condition, Songs = songs) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", control = "Control")) %>% 
   ggbarplot(x = "Condition", y = "Songs",
             order = c("Control", "STI"),
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -382,13 +394,14 @@ juv_n_song <-
 #plot t test for STI adults vs juveniles - number of songs bar graph
 sti_n_song <- 
   data %>% filter(condition == "sti") %>% 
-  select(Age = age, Songs = songs) %>% 
+  dplyr::select(Age = age, Songs = songs) %>% 
   mutate(Age = dplyr::recode(Age, juv = "Juvenile", adult = "Adult")) %>%
   ggbarplot(x = "Age", y = "Songs", 
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
             palette = c("#505053", "#9EBDBD"),
+            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -402,14 +415,15 @@ sti_n_song <-
 #plot t test for juv sti vs control - number of flights bargraph
 juv_fl <- 
   data %>% filter(age == "juv") %>% 
-  select(Condition = condition, Flights = flights) %>% 
+  dplyr::select(Condition = condition, Flights = flights) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", control = "Control")) %>% 
   ggbarplot(x = "Condition", y = "Flights",
             order = c("Control", "STI"),
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -425,13 +439,14 @@ juv_fl <-
 #plot t test for STI adults vs juveniles - number of flights bargraph
 sti_fl <- 
   data %>% filter(condition == "sti") %>% 
-  select(Age = age, Flights = flights) %>% 
+  dplyr::select(Age = age, Flights = flights) %>% 
   mutate(Age = dplyr::recode(Age, juv = "Juvenile", adult = "Adult")) %>% 
   ggbarplot(x = "Age", y = "Flights", 
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
             palette = c("#505053", "#9EBDBD"),
+            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -445,14 +460,15 @@ sti_fl <-
 #plot t test for juv sti vs control - time in 5M bar graph
 juv_t <- 
   data %>% filter(age=="juv") %>% 
-  select(Condition = condition, Time_in_5M = time) %>% 
+  dplyr::select(Condition = condition, Time_in_5M = time) %>% 
   mutate(Condition = dplyr::recode(Condition, sti = "STI", control = "Control")) %>%  
   ggbarplot(x = "Condition", y = "Time_in_5M",
             order = c("Control", "STI"),
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Condition",
-            palette = c("#bfbfbf", "#505053"),
+            #palette = c("#bfbfbf", "#505053"),
+            palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -468,13 +484,14 @@ juv_t <-
 #plot t test for STI adults vs juveniles - time in 5M bar graph
 sti_t <- 
   data %>% filter(condition=="sti") %>% 
-  select(Age = age, Time_in_5M = time) %>% 
+  dplyr::select(Age = age, Time_in_5M = time) %>% 
   mutate(Age = dplyr::recode(Age, juv = "Juvenile", adult = "Adult")) %>%   
   ggbarplot(x = "Age", y = "Time_in_5M", 
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
             palette = c("#505053", "#9EBDBD"),
+            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -493,7 +510,7 @@ juv_resp_lat + juv_t + juv_n_song + juv_fl +
   						CD", 
               guides = 'collect') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
-ggsave(paste0(path4figs, "behav_juv.tiff"), 
+ggsave(paste0(path4figs, "behav_juv.pdf"), 
        width = 15, height = 15, dpi = 300)
 
 
@@ -502,5 +519,5 @@ sti_resp_lat + sti_t + sti_n_song + sti_fl +
   						CD", 
               guides = 'collect') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
-ggsave(paste0(path4figs, "behav_sti.tiff"), 
+ggsave(paste0(path4figs, "behav_sti.pdf"), 
        width = 15, height = 15, dpi = 300)
