@@ -1,5 +1,7 @@
 library(tidyverse)
 library(ggpubr) ; library(patchwork)
+library(wesanderson)
+library(ggbreak)
 #library(kableExtra)
 
 
@@ -34,7 +36,7 @@ t_fig_a <-
        subtitle = NULL) +
   theme(text = element_text(size = 18), 
         legend.position = "none", legend.title = element_blank()) +
-  scale_y_continuous(limits = c(0, .17), expand = c(0, 0))
+  scale_y_continuous(limits = c(0, .16), expand = c(0, 0))
 
 t_fig_b <- 
   brain_data %>% filter(steroid == "t") %>% 
@@ -57,22 +59,29 @@ t_fig_b <-
   labs(x = NULL, 
        y = " ", 
        subtitle = NULL) +
-  theme(text = element_text(size = 18), legend.title = element_blank(), 
-        legend.position = c(0, 0.85), 
-        legend.justification = c(-0.15, 0),
-        legend.direction = "vertical") +
-  scale_y_continuous(limits = c(0, 3.2), expand = c(0, 0)) +
+  theme(legend.position = "none", text = element_text(size = 18), 
+        #legend.title = element_blank(), 
+        #legend.position = c(0, 0.2), 
+        #legend.justification = c(-0.15, 0),
+        #legend.direction = "vertical"
+        ) +
+  scale_y_continuous(limits = c(0, 3.25), 
+                     expand = c(0, 0), breaks = c(0, .25, .5, .75, 1, 3.25)) +
   geom_text(x = 1.82, y = 0.05, label = "nd", size = 6) +
   geom_text(x = 4.18, y = 0.05, label = "nd", size = 6) +
   geom_text(x = 4.82, y = 0.05, label = "nd", size = 6) +
   geom_text(x = 6.18, y = 0.05, label = "nd", size = 6) +
-  geom_text(x = 9.82, y = 0.05, label = "nd", size = 6)
+  geom_text(x = 9.82, y = 0.05, label = "nd", size = 6) +
+    scale_y_cut(breaks = c(1.1), which = c(1, 2), 
+                scales = c(0.1, 1), space = c(1.25)) 
 
 t_fig_a + t_fig_b + 
   plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
 ggsave(paste0(path4figs, "t_brain.pdf"), 
+       width = 16, height = 8, dpi = 300)
+ggsave(paste0(path4figs, "t_brain.svg"), 
        width = 16, height = 8, dpi = 300)
 
 ## corticosterone ####
@@ -143,7 +152,9 @@ b_fig_a + b_fig_b +
   plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
-ggsave(paste0(path4figs, "b_brain.tiff"), 
+ggsave(paste0(path4figs, "b_brain.pdf"), 
+       width = 16, height = 8, dpi = 300)
+ggsave(paste0(path4figs, "b_brain.svg"), 
        width = 16, height = 8, dpi = 300)
 
 ## dehydrocorticosterone #####
@@ -215,7 +226,7 @@ dhc_fig_a + dhc_fig_b +
               ) +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
-ggsave(paste0(path4figs, "dhc_brain.tiff"), 
+ggsave(paste0(path4figs, "dhc_brain.pdf"), 
        width = 16, height = 8, dpi = 300)  
 
 ## progesterone ####
@@ -293,7 +304,7 @@ p4_fig_a + p4_fig_b +
   plot_layout(design = "ABBBBBB", guides = 'keep') +
   plot_annotation(tag_levels = 'A', tag_sep = " ")
 
-ggsave(paste0(path4figs, "p4_brain.tiff"), 
+ggsave(paste0(path4figs, "p4_brain.pdf"), 
        width = 16, height = 8, dpi = 300)
 
 # all in one panel plot
@@ -355,7 +366,7 @@ sti_resp_lat <-
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
-            palette = c("#505053", "#9EBDBD"),
+            palette = c(wes_palette("Zissou1", 10, type = "continuous")[9], "#9EBDBD"),
             #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
@@ -400,8 +411,8 @@ sti_n_song <-
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
-            palette = c("#505053", "#9EBDBD"),
-            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
+            #palette = c("#505053", "#9EBDBD"),
+            palette = c(wes_palette("Zissou1", 10, type = "continuous")[9], "#9EBDBD"),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
@@ -445,7 +456,7 @@ sti_fl <-
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
-            palette = c("#505053", "#9EBDBD"),
+            palette = c(wes_palette("Zissou1", 10, type = "continuous")[9], "#9EBDBD"),
             #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
@@ -490,8 +501,8 @@ sti_t <-
             add = c("mean_se", "dotplot"),
             add.params = list(size = .35, alpha = 1, fill = "black"), 
             fill = "Age",
-            palette = c("#505053", "#9EBDBD"),
-            #palette = c("white", wes_palette("Zissou1", 10, type = "continuous")[9]),
+            #palette = c("#505053", "#9EBDBD"),
+            palette = c(wes_palette("Zissou1", 10, type = "continuous")[9], "#9EBDBD"),
             position = position_dodge(1)) +
   theme(legend.position = "none", 
         text = element_text(size = 22)) + 
