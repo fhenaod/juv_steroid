@@ -174,6 +174,21 @@ beh_data %>%
   wilcox.test(time ~ age, data = ., 
               na.rm = T, conf.int = T)
 
+#### rater's differences ####
+library(broom)
+beh_data %>% 
+  select_if(is.numeric) %>% 
+  sapply(., shapiro.test)
+
+beh_data %>% dplyr::select(rater = Rater, call_lat:time) %>% 
+  gather(key, value, -rater) %>% 
+  group_by(key) %>% 
+  ggplot(aes(x = rater, y = value)) + 
+  geom_boxplot(notchwidth = T) + 
+  geom_point(col = "red") +
+  theme_minimal() + stat_compare_means() +
+  facet_wrap(~key, scales ="free")
+
 #### Control juveniles vs adults ####
 beh_data %>%
   filter(condition == "control") %>% 
