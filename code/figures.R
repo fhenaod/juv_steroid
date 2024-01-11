@@ -7,8 +7,8 @@ library(ggbreak)
 
 # Brain and Blood ####
 # load data 
-brain_data <- read.csv("rev2/sg_ms_brain.csv")
-path4figs <- c("rev2/")
+brain_data <- read.csv("data/sg_ms_brain.csv")
+path4figs <- c("rfigs/")
 
 ## testosterone ####
 t_fig_a <- 

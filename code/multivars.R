@@ -1,10 +1,10 @@
 library(tidyverse)
 
 # load data ####
-beh <- read.csv("rev2/juv_beh_05-05-22.csv", header = T) 
+beh <- read.csv("data/juv_beh_05-05-22.csv", header = T) 
 head(beh)
 
-conc <- read.csv("rev2/sg_ms_brain.csv", header = T) 
+conc <- read.csv("data/sg_ms_brain.csv", header = T) 
 head(conc)
 
 # pca ####
