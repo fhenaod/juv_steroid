@@ -239,10 +239,6 @@ t.peripheral.emm
 
 ## Androstenedione ####
 
-#### Blood ####
-
-#### Brain ####
-
 #### Peripheral Tissues ####
 
 ae.adrenal.out <- pt_data %>% 
@@ -251,27 +247,7 @@ ae.adrenal.out <- pt_data %>%
   wilcox.test(conc ~ condition, data = .)
 ae.adrenal.out
 
-## Dihydrotestosterone ####
-
-#### Blood ####
-
-#### Brain ####
-
-#### Peripheral Tissues ####
-
-## Dehydroepiandrosterone ####
-
-#### Blood ####
-
-#### Brain ####
-
-#### Peripheral Tissues ####
-
 ## 17b-estradiol ####
-
-#### Blood ####
-
-#### Brain ####
 
 #### Peripheral Tissues ####
 
@@ -283,10 +259,6 @@ e2.liver.out
 
 ## 17a-estradiol ####
 
-#### Blood ####
-
-#### Brain ####
-
 #### Peripheral Tissues ####
 
 ae2.adrenal.out <- pt_data %>% 
@@ -295,19 +267,7 @@ ae2.adrenal.out <- pt_data %>%
   wilcox.test(conc ~ condition, data = .)
 ae2.adrenal.out
 
-## Estrone ####
-
-#### Blood ####
-
-#### Brain ####
-
-#### Peripheral Tissues ####
-
 ## Estriol ####
-
-#### Blood ####
-
-#### Brain ####
 
 #### Peripheral Tissues ####
 
@@ -351,10 +311,6 @@ p4.peripheral.emm <-
 p4.peripheral.emm
 
 ## Pregnenolone ####
-
-#### Blood ####
-
-#### Brain ####
 
 #### Peripheral Tissues ####
 
@@ -451,6 +407,3 @@ dhc.peripheral.emm <-
                    list(pairwise ~  matrix * condition),
                    adjust = "bh", lmer.df = "satterthwaite")
 dhc.peripheral.emm
-
-# **********************************************####
-
