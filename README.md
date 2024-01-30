@@ -1,7 +1,7 @@
 # Gray et al. 2024 Neuroscience
-doi
+ https://doi.org/10.1016/j.neuroscience.2024.01.008
 
-This repo contains the code from the paper: 
+This repo contains the data and code from the paper: 
 
 Effect of a territorial challenge on the steroid profile of a juvenile songbird. SL Gray, EK Lam, LF Henao-Diaz, C Jalabert, KK Soma _Neuroscience_ 2024 (x):x, pp - pp
 
