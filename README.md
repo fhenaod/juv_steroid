@@ -3,7 +3,7 @@
 
 This repo contains the data and code from the paper: 
 
-Effect of a territorial challenge on the steroid profile of a juvenile songbird. SL Gray, EK Lam, LF Henao-Diaz, C Jalabert, KK Soma _Neuroscience_ 2024 (x):x, pp - pp
+Effect of a territorial challenge on the steroid profile of a juvenile songbird. SL Gray, EK Lam, LF Henao-Diaz, C Jalabert, KK Soma _Neuroscience_ 2024 541, 118 - 132
 
 #
 
